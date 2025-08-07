@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriTrack - Calorie Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" >
+    <link rel="stylesheet" href="style.css">
+
+    
+   
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-apple-alt"></i>
+                <h1>CaloriScope</h1>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="food.html" class="nav-logo">
+                <i class="fas fa-apple-alt"></i>
+                <span>CaloriScope</span>
+            </a>
+        
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">Dashboard
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="scanner-section">
+                <h2 class="scanner-title"><i class="fas fa-search"></i> Search Food</h2>
+
+                <div class="filter-container">
+                    <button class="filter-btn active" data-category="all">All Foods</button>
+                    <button class="filter-btn" data-category="vegetable">Vegetables</button>
+                    <button class="filter-btn" data-category="fruit">Fruits</button>
+                    <button class="filter-btn" data-category="protein">Proteins</button>
+                    <button class="filter-btn" data-category="restaurant">Restaurant</button>
+                    <button class="filter-btn" data-category="dairy">Dairy</button>
+                </div>
+
+                <div class="search-container">
+                    <input type="text" id="foodInput" placeholder="Enter food name (e.g. apple, chicken breast)">
+                    <button id="searchBtn"><i class="fas fa-search"></i> Check Calories</button>
+                    <div class="suggestions" id="suggestions">
+                        <!-- Suggestions will be added here dynamically -->
+                    </div>
+                </div>
+
+                <div class="database-info">
+                    <i class="fas fa-database"></i> Database: 1000+ foods including 200+ vegetables and 300+ restaurant dishes
+                </div>
+
+                <div class="result-container" id="resultContainer">
+                    <div class="result-header">
+                        <div class="food-name" id="foodName">Apple</div>
+                        <div class="calories" id="totalCalories">95 kcal</div>
+                    </div>
+
+                    <div class="nutrition-breakdown">
+                        <h3>Nutritional Breakdown</h3>
+                        <div class="nutrient-grid">
+                            <div class="nutrient-card">
+                                <div class="nutrient-value" id="carbsValue">25g</div>
+                                <div class="nutrient-label">Carbs</div>
+                            </div>
+                            <div class="nutrient-card">
+                                <div class="nutrient-value" id="proteinValue">0.5g</div>
+                                <div class="nutrient-label">Protein</div>
+                            </div>
+                            <div class="nutrient-card">
+                                <div class="nutrient-value" id="fatValue">0.3g</div>
+                                <div class="nutrient-label">Fat</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="progress-section">
+                        <div class="progress-title">
+                            <span>Today's Total</span>
+                            <span><strong id="todayTotal">0</strong> kcal</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div style="text-align: right; margin-top: 5px;">
+                            <strong>Goal: 2,000 kcal</strong>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        
+                        <button class="action-button primary" id="addToLogBtn">
+                            <i class="fas fa-plus"></i> Add to Log
+                        </button>
+                    </div>
+                </div>
+                
+
+                <div class="today-total-card">
+                    <h3>Your Daily Nutrition</h3>
+                    <div class="today-total-value"><span id="dailyTotal">0</span> kcal</div>
+                    <div class="progress-bar" style="margin-top: 15px;">
+                        <div class="progress-fill" id="dailyProgress"></div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <strong>Goal: 2,000 kcal</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-section">
+                <h2 class="section-title"><i class="fas fa-history"></i> Recent Foods</h2>
+
+                <div class="history-list" id="historyList">
+                    <div class="history-empty">
+                        <i class="fas fa-history fa-2x" style="margin-bottom: 10px;"></i>
+                        <p>No recent foods</p>
+                        <p style="font-size: 0.9rem; margin-top: 5px;">Search for foods to see them here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-exclamation-circle"></i> <span id="notificationText">Food not found!</span>
+    </div>
+    
+
+    <footer>
+        <p>© 2025 by Adeesha Hirushan | CaloriScope </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

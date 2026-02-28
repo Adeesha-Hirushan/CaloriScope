@@ -101,13 +101,29 @@
         }
 
         .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: var(--dark);
-            text-decoration: none;
+            
+           display: flex;
+           align-items: center;
+           gap: 8px;
+       
+           text-decoration: none;
+           color: inherit;
+       
+           cursor: pointer;
+           padding: 6px 10px;
+           border-radius: 8px;
+       
+           transition: background 0.2s ease, transform 0.1s ease;
+       }
+
+.nav-logo:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.nav-logo:active {
+    transform: scale(0.97);
+}
+
         }
 
         .nav-logo i {
@@ -653,4 +669,5 @@
                 border-radius: 0 0 15px 15px;
             }
         }
+
   

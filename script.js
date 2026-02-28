@@ -246,6 +246,8 @@
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         const navLinks = document.querySelectorAll('.nav-link');
+        const DAILY_GOAL = 2000;
+        let goalReached = false;
 
         // User's daily food log
         let dailyFoodLog = [];
@@ -367,7 +369,22 @@
             });
 
             // Update daily total
-            updateDailyTotal();
+            function updateDailyTotal() {
+            const total = dailyFoodLog.reduce((sum, item) => sum + item.calories, 0);
+            dailyTotal.textContent = total;
+            todayTotal.textContent = total;
+        
+            // Progress percentage
+            const percentage = (total / DAILY_GOAL) * 100;
+            progressFill.style.width = `${Math.min(percentage, 100)}%`;
+            dailyProgress.style.width = `${Math.min(percentage, 100)}%`;
+        
+            // 🎉 Goal reached notification (ONLY ONCE)
+            if (total >= DAILY_GOAL && !goalReached) {
+                goalReached = true;
+                showNotification("🎉 Congratulations! Daily goal of 2000 kcal completed!");
+            }
+        }
 
             // Add to history UI
             const historyItem = document.createElement('div');
@@ -406,9 +423,19 @@
         }
 
         // Initialize history
-        function initHistory() {
+            function initHistory() {
             dailyFoodLog = [];
+            goalReached = false; // reset goal
             updateDailyTotal();
+        
+            historyList.innerHTML = `
+                <div class="history-empty">
+                    <i class="fas fa-history fa-2x" style="margin-bottom: 10px;"></i>
+                    <p>No recent foods</p>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">Search for foods to see them here</p>
+                </div>
+            `;
+        }
             
             // Reset the history list to empty state
             historyList.innerHTML = `
@@ -505,4 +532,5 @@
             initHistory();
         });
         
+
   

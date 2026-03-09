@@ -221,7 +221,87 @@
             { name: "Cheese (Colby)", category: "dairy", carbs: 0.7, protein: 7, fat: 9, serving: "1 oz" },
             { name: "Cheese (Cotija)", category: "dairy", carbs: 0.6, protein: 6, fat: 8, serving: "1 oz" },
             { name: "Cheese (Cream)", category: "dairy", carbs: 1.6, protein: 2.1, fat: 10, serving: "1 oz" },
-        ];
+            
+                        // 🌾 Rice & Curry / Staples
+              { name: "White Rice (Cooked)", category: "sri-lankan", carbs: 45, protein: 4.2, fat: 0.4, serving: "1 cup" },
+              { name: "Red Rice (Cooked)", category: "sri-lankan", carbs: 44, protein: 4.5, fat: 0.6, serving: "1 cup" },
+              { name: "String Hoppers (Idiyappam)", category: "sri-lankan", carbs: 35, protein: 6, fat: 1, serving: "6 pieces" },
+              { name: "Hoppers (Appa)", category: "sri-lankan", carbs: 30, protein: 5, fat: 3, serving: "1 hopper" },
+              { name: "Egg Hoppers (Appa)", category: "sri-lankan", carbs: 32, protein: 7, fat: 4, serving: "1 hopper" },
+              { name: "Coconut Roti", category: "sri-lankan", carbs: 33, protein: 4, fat: 8, serving: "1 roti" },
+              { name: "Pol Roti", category: "sri-lankan", carbs: 34, protein: 4, fat: 7, serving: "1 roti" },
+
+              // 🍛 Curries
+              { name: "Dhal Curry", category: "sri-lankan", carbs: 15, protein: 6, fat: 5, serving: "1 cup" },
+              { name: "Potato Curry", category: "sri-lankan", carbs: 20, protein: 3, fat: 7, serving: "1 cup" },
+              { name: "Brinjal (Eggplant) Curry", category: "sri-lankan", carbs: 10, protein: 2, fat: 6, serving: "1 cup" },
+              { name: "Seeni Sambol", category: "sri-lankan", carbs: 22, protein: 1.5, fat: 8, serving: "1/4 cup" },
+              { name: "Pol Sambol", category: "sri-lankan", carbs: 10, protein: 2, fat: 15, serving: "1/4 cup" },
+              { name: "Fish Ambul Thiyal", category: "sri-lankan", carbs: 2, protein: 24, fat: 8, serving: "1 cup" },
+              { name: "Chicken Curry (Sri Lankan)", category: "sri-lankan", carbs: 4, protein: 28, fat: 15, serving: "1 cup" },
+              { name: "Mutton Curry (Sri Lankan)", category: "sri-lankan", carbs: 2, protein: 25, fat: 20, serving: "1 cup" },
+
+              // 🍗 Proteins (local)
+              { name: "Sri Lankan Fried Fish", category: "sri-lankan", carbs: 0, protein: 26, fat: 14, serving: "100g" },
+              { name: "Crab Curry", category: "sri-lankan", carbs: 3, protein: 22, fat: 12, serving: "1 cup" },
+              { name: "Prawn Curry", category: "sri-lankan", carbs: 2, protein: 24, fat: 8, serving: "1 cup" },
+              { name: "Beef Fry (Sri Lankan)", category: "sri-lankan", carbs: 1, protein: 25, fat: 18, serving: "100g" },
+              { name: "Devilled Chicken", category: "sri-lankan", carbs: 5, protein: 27, fat: 14, serving: "100g" },
+
+              // 🍠 Vegetables & Sides
+              { name: "Gotu Kola Sambol", category: "sri-lankan", carbs: 3, protein: 3, fat: 6, serving: "1 cup" },
+              { name: "Mallung (Green Leaf)", category: "sri-lankan", carbs: 4, protein: 4, fat: 5, serving: "1 cup" },
+              { name: "Beans Stir Fry", category: "sri-lankan", carbs: 7, protein: 2, fat: 4, serving: "1 cup" },
+              { name: "Brinjal Moju", category: "sri-lankan", carbs: 12, protein: 1, fat: 6, serving: "1/2 cup" },
+              { name: "Vattalappam", category: "sri-lankan", carbs: 28, protein: 6, fat: 12, serving: "1 slice" },
+
+              // 🥥 Traditional Snacks
+              { name: "Kokis", category: "sri-lankan", carbs: 28, protein: 4, fat: 16, serving: "3 pieces" },
+              { name: "Aluwa", category: "sri-lankan", carbs: 35, protein: 3, fat: 10, serving: "2 pieces" },
+              { name: "Kalu Dodol", category: "sri-lankan", carbs: 38, protein: 1, fat: 8, serving: "1 piece" },
+              { name: "Wattalappam", category: "sri-lankan", carbs: 30, protein: 5, fat: 10, serving: "1 slice" },
+
+              // 🍹 Drinks (Sri Lankan)
+              { name: "King Coconut Water", category: "sri-lankan", carbs: 9, protein: 0.7, fat: 0.2, serving: "1 cup" },
+              { name: "Wood Apple Juice", category: "sri-lankan", carbs: 18, protein: 1, fat: 0.3, serving: "1 cup" },
+
+              // 🍞 Bakery / Street
+              { name: "Butter Bun", category: "sri-lankan", carbs: 24, protein: 5, fat: 7, serving: "1 bun" },
+              { name: "Vegetable Roti", category: "sri-lankan", carbs: 30, protein: 6, fat: 8, serving: "1 roti" },
+
+              // 🍟 Fast Local
+              { name: "Egg Roll (Sri Lankan)", category: "sri-lankan", carbs: 28, protein: 10, fat: 12, serving: "1 roll" },
+              { name: "Chicken Wrap (Sri Lankan)", category: "sri-lankan", carbs: 35, protein: 18, fat: 10, serving: "1 wrap" },
+
+              // 🍠 More Veg / Staples
+              { name: "Pumpkin Curry", category: "sri-lankan", carbs: 10, protein: 2, fat: 6, serving: "1 cup" },
+              { name: "Beetroot Curry", category: "sri-lankan", carbs: 9, protein: 2, fat: 5, serving: "1 cup" },
+              { name: "Cucumber Salad", category: "sri-lankan", carbs: 4, protein: 1, fat: 0.2, serving: "1 cup" },
+              { name: "Green Gram Curry", category: "sri-lankan", carbs: 15, protein: 8, fat: 5, serving: "1 cup" },
+              
+              // 🍛 More Curries
+              { name: "Fish Curry (Sri Lankan)", category: "sri-lankan", carbs: 1, protein: 22, fat: 10, serving: "1 cup" },
+              { name: "Jackfruit Curry", category: "sri-lankan", carbs: 20, protein: 2, fat: 2, serving: "1 cup" },
+              { name: "Potato Mallung", category: "sri-lankan", carbs: 12, protein: 3, fat: 4, serving: "1 cup" },
+              { name: "Brinjal Salad", category: "sri-lankan", carbs: 6, protein: 1, fat: 0.2, serving: "1 cup" },
+
+              // 🍌 More Snacks
+              { name: "Banana (Pol) Vadai", category: "sri-lankan", carbs: 25, protein: 3, fat: 10, serving: "2 pieces" },
+              { name: "Medi Vadai", category: "sri-lankan", carbs: 20, protein: 4, fat: 9, serving: "2 pieces" },
+              { name: "Murukku", category: "sri-lankan", carbs: 30, protein: 3, fat: 11, serving: "1 serving" },
+              
+              // 🍠 More Rotis / Breads
+              { name: "Parata", category: "sri-lankan", carbs: 35, protein: 7, fat: 12, serving: "1 parata" },
+              { name: "Godamba Roti", category: "sri-lankan", carbs: 38, protein: 7, fat: 12, serving: "1 roti" },
+              
+              // 🍲 Local Desserts
+              { name: "Halape", category: "sri-lankan", carbs: 25, protein: 2, fat: 6, serving: "1 slice" },
+              { name: "Bengali Halwa", category: "sri-lankan", carbs: 28, protein: 3, fat: 8, serving: "1 slice" },
+
+            ];
+            
+
+   
 
         // DOM elements
         const foodInput = document.getElementById('foodInput');

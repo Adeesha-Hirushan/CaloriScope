@@ -223,7 +223,7 @@
             { name: "Cheese (Cream)", category: "dairy", carbs: 1.6, protein: 2.1, fat: 10, serving: "1 oz" },
             
                         // 🌾 Rice & Curry / Staples
-              { name: "White Rice (Cooked)", category: "sri-lankan", carbs: 45, protein: 4.2, fat: 0.4, serving: "1 cup" },
+            { name: "White Rice (Cooked)", category: "sri-lankan", carbs: 45, protein: 4.2, fat: 0.4, serving: "1 cup" },
               { name: "Red Rice (Cooked)", category: "sri-lankan", carbs: 44, protein: 4.5, fat: 0.6, serving: "1 cup" },
               { name: "String Hoppers (Idiyappam)", category: "sri-lankan", carbs: 35, protein: 6, fat: 1, serving: "6 pieces" },
               { name: "Hoppers (Appa)", category: "sri-lankan", carbs: 30, protein: 5, fat: 3, serving: "1 hopper" },
@@ -586,3 +586,4 @@
         });
         
   
+

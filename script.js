@@ -246,276 +246,205 @@
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         const navLinks = document.querySelectorAll('.nav-link');
-        const DAILY_GOAL = 2000;
-        let goalReached = false;
-                            // DAILY GOAL
-                const DAILY_GOAL = 2000;
-                let goalReached = false;
-                
-                // User food log
-                let dailyFoodLog = [];
-                let currentCategory = "all";
+
+        // User's daily food log
+        let dailyFoodLog = [];
+        let currentCategory = 'all';
+
+        // Calculate calories from macros
+        function calculateCalories(carbs, protein, fat) {
+            // Carbs: 4 kcal/g, Protein: 4 kcal/g, Fat: 9 kcal/g
+            return Math.round((carbs * 4) + (protein * 4) + (fat * 9));
+        }
+
+        // Search for food in database
+        function searchFood() {
+            const searchTerm = foodInput.value.trim().toLowerCase();
+
+            if (!searchTerm) {
+                showNotification("Please enter a food name");
+                return;
+            }
+
+            // Find matching food
+            let matchedFoods = [];
+            if (currentCategory === 'all') {
+                matchedFoods = foodDatabase.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm)
+                );
+            } else {
+                matchedFoods = foodDatabase.filter(item => 
+                    item.category === currentCategory && 
+                    item.name.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            if (matchedFoods.length > 0) {
+                // Use first match for simplicity
+                const food = matchedFoods[0];
                 
                 // Calculate calories
-                function calculateCalories(carbs, protein, fat) {
-                    return Math.round((carbs * 4) + (protein * 4) + (fat * 9));
-                }
-                
-                // SEARCH FOOD
-                function searchFood() {
-                
-                    const searchTerm = foodInput.value.trim().toLowerCase();
-                
-                    if (!searchTerm) {
-                        showNotification("Please enter a food name");
-                        return;
-                    }
-                
-                    let matchedFoods = [];
-                
-                    if (currentCategory === "all") {
-                
-                        matchedFoods = foodDatabase.filter(food =>
-                            food.name.toLowerCase().includes(searchTerm)
-                        );
-                
-                    } else {
-                
-                        matchedFoods = foodDatabase.filter(food =>
-                            food.category === currentCategory &&
-                            food.name.toLowerCase().includes(searchTerm)
-                        );
-                
-                    }
-                
-                    if (matchedFoods.length > 0) {
-                
-                        const food = matchedFoods[0];
-                
-                        const calories = calculateCalories(
-                            food.carbs,
-                            food.protein,
-                            food.fat
-                        );
-                
-                        foodName.textContent = `${food.name} (${food.serving})`;
-                        totalCalories.textContent = `${calories} kcal`;
-                        carbsValue.textContent = `${food.carbs}g`;
-                        proteinValue.textContent = `${food.protein}g`;
-                        fatValue.textContent = `${food.fat}g`;
-                
-                        resultContainer.style.display = "block";
-                
-                    } else {
-                
-                        showNotification("Food not found");
-                
-                    }
-                }
-                
-                
-                // SUGGESTIONS
-                function showSuggestions() {
-                
-                    const searchTerm = foodInput.value.trim().toLowerCase();
-                
-                    suggestions.innerHTML = "";
-                
-                    if (!searchTerm) {
-                        suggestions.style.display = "none";
-                        return;
-                    }
-                
-                    let matchedFoods = foodDatabase.filter(food =>
-                        food.name.toLowerCase().includes(searchTerm)
-                    );
-                
-                    matchedFoods = matchedFoods.slice(0,5);
-                
-                    matchedFoods.forEach(food => {
-                
-                        const calories = calculateCalories(
-                            food.carbs,
-                            food.protein,
-                            food.fat
-                        );
-                
-                        const item = document.createElement("div");
-                
-                        item.className = "suggestion-item";
-                
-                        item.innerHTML = `
-                        <div>${food.name}</div>
-                        <small>${calories} kcal</small>
-                        `;
-                
-                        item.addEventListener("click", () => {
-                
-                            foodInput.value = food.name;
-                
-                            suggestions.style.display = "none";
-                
-                            searchFood();
-                
-                        });
-                
-                        suggestions.appendChild(item);
-                
-                    });
-                
-                    suggestions.style.display = "block";
-                
-                }
-                
-                
-                // ADD FOOD TO LOG
-                function addToHistory() {
-                
-                    const foodText = foodName.textContent;
-                    const caloriesText = totalCalories.textContent;
-                
-                    if (!foodText) {
-                        showNotification("Search food first");
-                        return;
-                    }
-                
-                    const calories = parseInt(caloriesText);
-                
-                    dailyFoodLog.push({
-                        name: foodText,
-                        calories: calories
-                    });
-                
-                    updateDailyTotal();
-                
-                
-                    const historyItem = document.createElement("div");
-                
-                    historyItem.className = "history-item";
-                
-                    historyItem.innerHTML = `
-                    <div>${foodText}</div>
-                    <div>${calories} kcal</div>
-                    `;
-                
-                    if (historyList.querySelector(".history-empty")) {
-                        historyList.innerHTML = "";
-                    }
-                
-                    historyList.prepend(historyItem);
-                
-                    if (historyList.children.length > 10) {
-                        historyList.removeChild(historyList.lastChild);
-                    }
-                
-                    showNotification("Food added to log");
-                
-                }
-                
-                
-                // UPDATE DAILY TOTAL
-                function updateDailyTotal() {
-                
-                    const total = dailyFoodLog.reduce((sum, food) => sum + food.calories, 0);
-                
-                    dailyTotal.textContent = total;
-                    todayTotal.textContent = total;
-                
-                    const percent = (total / DAILY_GOAL) * 100;
-                
-                    progressFill.style.width = `${Math.min(percent,100)}%`;
-                    dailyProgress.style.width = `${Math.min(percent,100)}%`;
-                
-                    if (total >= DAILY_GOAL && !goalReached) {
-                
-                        goalReached = true;
-                
-                        showNotification("🎉 Daily calorie goal reached!");
-                
-                    }
-                
-                }
-                
-                
-                // INIT HISTORY
-                function initHistory(){
-                
-                    dailyFoodLog = [];
-                    goalReached = false;
-                
-                    updateDailyTotal();
-                
-                    historyList.innerHTML = `
-                    <div class="history-empty">
-                    <p>No recent foods</p>
-                    </div>
-                    `;
-                }
-                
-                
-                // NOTIFICATION
-                function showNotification(message){
-                
-                    notificationText.textContent = message;
-                
-                    notification.style.display = "block";
-                
-                    setTimeout(()=>{
-                        notification.style.display = "none";
-                    },3000);
-                
-                }
-                
-                
-                // ADD CUSTOM FOOD
-                function addCustomFood(){
-                
-                    const name = prompt("Food name");
-                
-                    if(!name) return;
-                
-                    const carbs = parseFloat(prompt("Carbs g")||0);
-                    const protein = parseFloat(prompt("Protein g")||0);
-                    const fat = parseFloat(prompt("Fat g")||0);
-                
-                    const calories = calculateCalories(carbs,protein,fat);
-                
-                    foodName.textContent = `${name} (custom)`;
-                    totalCalories.textContent = `${calories} kcal`;
-                    carbsValue.textContent = `${carbs}g`;
-                    proteinValue.textContent = `${protein}g`;
-                    fatValue.textContent = `${fat}g`;
-                
-                    resultContainer.style.display = "block";
-                
-                }
-                
-                
-                // EVENTS
-                searchBtn.addEventListener("click", searchFood);
-                
-                foodInput.addEventListener("input", showSuggestions);
-                
-                foodInput.addEventListener("keypress",(e)=>{
-                
-                    if(e.key==="Enter"){
-                        searchFood();
-                    }
-                
-                });
-                
-                addToLogBtn.addEventListener("click", addToHistory);
-                
-                addCustomBtn.addEventListener("click", addCustomFood);
-                
-                
-                // INIT
-                document.addEventListener("DOMContentLoaded",()=>{
-                
-                    initHistory();
-                
-                });
+                const calories = calculateCalories(food.carbs, food.protein, food.fat);
 
+                // Update UI
+                foodName.textContent = `${food.name} (${food.serving})`;
+                totalCalories.textContent = `${calories} kcal`;
+                carbsValue.textContent = `${food.carbs}g`;
+                proteinValue.textContent = `${food.protein}g`;
+                fatValue.textContent = `${food.fat}g`;
+
+                // Show result container
+                resultContainer.style.display = 'block';
+            } else {
+                showNotification("Food not found. Please try another food item.");
+            }
+        }
+
+        // Show suggestions as user types
+        function showSuggestions() {
+            const searchTerm = foodInput.value.trim().toLowerCase();
+            suggestions.innerHTML = '';
+
+            if (!searchTerm) {
+                suggestions.style.display = 'none';
+                return;
+            }
+
+            let matchedFoods = [];
+            if (currentCategory === 'all') {
+                matchedFoods = foodDatabase.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm)
+                );
+            } else {
+                matchedFoods = foodDatabase.filter(item => 
+                    item.category === currentCategory && 
+                    item.name.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            matchedFoods = matchedFoods.slice(0, 5);
+
+            if (matchedFoods.length > 0) {
+                matchedFoods.forEach(food => {
+                    const calories = calculateCalories(food.carbs, food.protein, food.fat);
+                    
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.className = 'suggestion-item';
+                    suggestionItem.innerHTML = `
+                        <div class="suggestion-name">${food.name}</div>
+                        <div class="suggestion-calories">${calories} kcal</div>
+                    `;
+                    suggestionItem.addEventListener('click', () => {
+                        foodInput.value = food.name;
+                        suggestions.style.display = 'none';
+                        searchFood();
+                    });
+                    suggestions.appendChild(suggestionItem);
+                });
+                suggestions.style.display = 'block';
+            } else {
+                suggestions.style.display = 'none';
+            }
+        }
+
+        // Add food to history and daily log
+        function addToHistory() {
+            const foodText = foodName.textContent;
+            const caloriesText = totalCalories.textContent;
+
+            if (!foodText || foodText === "Apple") {
+                showNotification("Please search for a food first");
+                return;
+            }
+
+            // Extract calories number
+            const calories = parseInt(caloriesText);
+
+            // Add to daily log
+            dailyFoodLog.push({
+                name: foodText,
+                calories: calories
+            });
+
+            // Update daily total
+            updateDailyTotal();
+
+            // Add to history UI
+            const historyItem = document.createElement('div');
+            historyItem.className = 'history-item';
+            historyItem.innerHTML = `
+                <div class="history-item-name">${foodText}</div>
+                <div class="history-item-calories">${calories} kcal</div>
+            `;
+
+            // Remove empty state if it exists
+            if (historyList.querySelector('.history-empty')) {
+                historyList.innerHTML = '';
+            }
+
+            // Add to top of history
+            historyList.insertBefore(historyItem, historyList.firstChild);
+
+            // Limit to 10 items
+            if (historyList.children.length > 10) {
+                historyList.removeChild(historyList.lastChild);
+            }
+
+            showNotification(`Added ${foodText} to your log!`);
+        }
+
+        // Update daily total calories
+        function updateDailyTotal() {
+            const total = dailyFoodLog.reduce((sum, item) => sum + item.calories, 0);
+            dailyTotal.textContent = total;
+            todayTotal.textContent = total;
+
+            // Calculate progress percentage (max 2000 kcal)
+            const percentage = (total / 2000) * 100;
+            progressFill.style.width = `${Math.min(percentage, 100)}%`;
+            dailyProgress.style.width = `${Math.min(percentage, 100)}%`;
+        }
+
+        // Initialize history
+        function initHistory() {
+            dailyFoodLog = [];
+            updateDailyTotal();
+            
+            // Reset the history list to empty state
+            historyList.innerHTML = `
+                <div class="history-empty">
+                    <i class="fas fa-history fa-2x" style="margin-bottom: 10px;"></i>
+                    <p>No recent foods</p>
+                    <p style="font-size: 0.9rem; margin-top: 5px;">Search for foods to see them here</p>
+                </div>
+            `;
+        }
+
+        // Show notification
+        function showNotification(message) {
+            notificationText.textContent = message;
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Add custom food
+        function addCustomFood() {
+            const name = prompt("Enter food name:");
+            if (!name) return;
+
+            const carbs = parseFloat(prompt("Enter carbs (g):") || 0);
+            const protein = parseFloat(prompt("Enter protein (g):") || 0);
+            const fat = parseFloat(prompt("Enter fat (g):") || 0);
+
+            if (isNaN(carbs) || isNaN(protein) || isNaN(fat)) {
+                showNotification("Please enter valid numbers for nutrition values");
+                return;
+            }
+
+            const calories = calculateCalories(carbs, protein, fat);
 
             // Update UI
             foodName.textContent = `${name} (custom)`;
@@ -576,6 +505,4 @@
             initHistory();
         });
         
-
   
-
